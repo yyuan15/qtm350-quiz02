@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "create-dataset.html",
+    "href": "create-dataset.html",
+    "title": "Create the Gapminder dataset",
+    "section": "",
+    "text": "# Import necessary libraries\nimport pandas as pd\nfrom gapminder import gapminder\n\n# Rename 'lifeExp' to 'life_expectancy' and 'gdpPercap' to 'gdp_per_capita'\ngapminder = gapminder.rename(columns={'lifeExp': 'life_expectancy',\n                                      'pop': 'population_millions', \n                                      'gdpPercap': 'gdp_per_capita'})\n\n# Convert population to millions\ngapminder['population_millions'] = gapminder['population_millions'] / 1_000_000\n\n# Create a new pandas DataFrame from the modified gapminder data\ngapminder_df = pd.DataFrame(gapminder)\n\n# Save the DataFrame as a CSV file\ngapminder_df.to_csv('gapminder.csv', index=False)\n\n# Print the first 3 rows of the DataFrame\nprint(gapminder_df.head(3))\n\n       country continent  year  life_expectancy  population_millions  \\\n0  Afghanistan      Asia  1952           28.801             8.425333   \n1  Afghanistan      Asia  1957           30.332             9.240934   \n2  Afghanistan      Asia  1962           31.997            10.267083   \n\n   gdp_per_capita  \n0      779.445314  \n1      820.853030  \n2      853.100710"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "life-gdp.html",
+    "href": "life-gdp.html",
+    "title": "Life Expectancy and GDP per Capita",
+    "section": "",
+    "text": "The relationship between life expectancy and GDP per capita is crucial in understanding global economic development and public health. Generally, higher GDP per capita is associated with longer life expectancy, as wealthier countries tend to invest more in healthcare, education, and quality of life improvements.\n\n\n\nBelow is a scatter plot (Figure 1) showing the relationship between GDP per capita and life expectancy using the Gapminder dataset.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select relevant columns and drop missing values\ndf = df[['gdp_per_capita', 'life_expectancy']].dropna()\n\n# Scatter plot\nplt.figure(figsize=(8,6))\nsns.scatterplot(x=df['gdp_per_capita'], y=df['life_expectancy'])\nplt.xlabel(\"GDP per Capita (USD)\")\nplt.ylabel(\"Life Expectancy (Years)\")\nplt.title(\"Relationship Between GDP per Capita and Life Expectancy\")\nplt.xscale(\"log\")  # Log scale for better visualization\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: ife Expectancy and GDP per Capita\n\n\n\n\n\nFindings:\n\nThe scatter plot shows a positive correlation between GDP per capita and life expectancy, with a logarithmic scale applied to GDP per capita for better visualization.\nCountries with higher GDP per capita generally have higher life expectancy.\nThe increase in life expectancy slows down at higher income levels, meaning wealthier nations gain smaller health benefits from additional economic growth."
+  },
+  {
+    "objectID": "life-gdp.html#introduction",
+    "href": "life-gdp.html#introduction",
+    "title": "Life Expectancy and GDP per Capita",
+    "section": "",
+    "text": "The relationship between life expectancy and GDP per capita is crucial in understanding global economic development and public health. Generally, higher GDP per capita is associated with longer life expectancy, as wealthier countries tend to invest more in healthcare, education, and quality of life improvements."
+  },
+  {
+    "objectID": "life-gdp.html#data-visualization",
+    "href": "life-gdp.html#data-visualization",
+    "title": "Life Expectancy and GDP per Capita",
+    "section": "",
+    "text": "Below is a scatter plot (Figure 1) showing the relationship between GDP per capita and life expectancy using the Gapminder dataset.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select relevant columns and drop missing values\ndf = df[['gdp_per_capita', 'life_expectancy']].dropna()\n\n# Scatter plot\nplt.figure(figsize=(8,6))\nsns.scatterplot(x=df['gdp_per_capita'], y=df['life_expectancy'])\nplt.xlabel(\"GDP per Capita (USD)\")\nplt.ylabel(\"Life Expectancy (Years)\")\nplt.title(\"Relationship Between GDP per Capita and Life Expectancy\")\nplt.xscale(\"log\")  # Log scale for better visualization\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: ife Expectancy and GDP per Capita\n\n\n\n\n\nFindings:\n\nThe scatter plot shows a positive correlation between GDP per capita and life expectancy, with a logarithmic scale applied to GDP per capita for better visualization.\nCountries with higher GDP per capita generally have higher life expectancy.\nThe increase in life expectancy slows down at higher income levels, meaning wealthier nations gain smaller health benefits from additional economic growth."
+  },
+  {
+    "objectID": "country.html",
+    "href": "country.html",
+    "title": "Country Analysis: Spain",
+    "section": "",
+    "text": "Spain has undergone significant economic and social changes over the years. This analysis explores how life expectancy, GDP per capita, and population have evolved in Spain from 1952 to 2007 using the Gapminder dataset.\n\n\n\nBelow is a graph (Figure 1) showing how Spain’s life expectancy, GDP per capita, and population changed over time.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv(\"gapminder.csv\")\n\nspain_data = df[df[\"country\"] == \"Spain\"]\n\n# Create subplots\nfig, axes = plt.subplots(3, 1, figsize=(8, 12))\n\n# Plot Life Expectancy\naxes[0].plot(spain_data[\"year\"], spain_data[\"life_expectancy\"], color=\"blue\", marker=\"o\")\naxes[0].set_title(\"Spain: Life Expectancy Over Time\")\naxes[0].set_xlabel(\"Year\")\naxes[0].set_ylabel(\"Life Expectancy (Years)\")\naxes[0].grid(True)\n\n# Plot GDP per Capita\naxes[1].plot(spain_data[\"year\"], spain_data[\"gdp_per_capita\"], color=\"green\", marker=\"s\")\naxes[1].set_title(\"Spain: GDP per Capita Over Time\")\naxes[1].set_xlabel(\"Year\")\naxes[1].set_ylabel(\"GDP per Capita (USD)\")\naxes[1].grid(True)\n\n# Plot Population\naxes[2].plot(spain_data[\"year\"], spain_data[\"population_millions\"], color=\"red\", marker=\"d\")\naxes[2].set_title(\"Spain: Population Over Time\")\naxes[2].set_xlabel(\"Year\")\naxes[2].set_ylabel(\"Population (Millions)\")\naxes[2].grid(True)\n\n# Adjust layout\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Spain\n\n\n\n\n\nFindings:\n\nLife Expectancy\n\nSpain has seen a steady increase in life expectancy, rising from around 65 years in 1952 to over 81 years by 2007.\nThis trend indicates improvements in healthcare, sanitation, nutrition, and overall living conditions over time.\n\nGDP per Capita\n\nGDP per capita increased significantly from under $5,000 in 1952 to over $30,000 in 2007.\nThe steepest growth occurred after 1980, suggesting economic expansion, industrialization, and stronger integration into the global economy (e.g., Spain joining the EU in 1986).\n\nPopulation Growth\n\nSpain’s population grew consistently from about 28 million in 1952 to over 40 million by 2007.\nThe most rapid growth happened between 1950-1980, after which the rate of increase slowed down, possibly due to declining birth rates and economic shifts."
+  },
+  {
+    "objectID": "country.html#introduction",
+    "href": "country.html#introduction",
+    "title": "Country Analysis: Spain",
+    "section": "",
+    "text": "Spain has undergone significant economic and social changes over the years. This analysis explores how life expectancy, GDP per capita, and population have evolved in Spain from 1952 to 2007 using the Gapminder dataset."
+  },
+  {
+    "objectID": "country.html#data-visualization",
+    "href": "country.html#data-visualization",
+    "title": "Country Analysis: Spain",
+    "section": "",
+    "text": "Below is a graph (Figure 1) showing how Spain’s life expectancy, GDP per capita, and population changed over time.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv(\"gapminder.csv\")\n\nspain_data = df[df[\"country\"] == \"Spain\"]\n\n# Create subplots\nfig, axes = plt.subplots(3, 1, figsize=(8, 12))\n\n# Plot Life Expectancy\naxes[0].plot(spain_data[\"year\"], spain_data[\"life_expectancy\"], color=\"blue\", marker=\"o\")\naxes[0].set_title(\"Spain: Life Expectancy Over Time\")\naxes[0].set_xlabel(\"Year\")\naxes[0].set_ylabel(\"Life Expectancy (Years)\")\naxes[0].grid(True)\n\n# Plot GDP per Capita\naxes[1].plot(spain_data[\"year\"], spain_data[\"gdp_per_capita\"], color=\"green\", marker=\"s\")\naxes[1].set_title(\"Spain: GDP per Capita Over Time\")\naxes[1].set_xlabel(\"Year\")\naxes[1].set_ylabel(\"GDP per Capita (USD)\")\naxes[1].grid(True)\n\n# Plot Population\naxes[2].plot(spain_data[\"year\"], spain_data[\"population_millions\"], color=\"red\", marker=\"d\")\naxes[2].set_title(\"Spain: Population Over Time\")\naxes[2].set_xlabel(\"Year\")\naxes[2].set_ylabel(\"Population (Millions)\")\naxes[2].grid(True)\n\n# Adjust layout\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Spain\n\n\n\n\n\nFindings:\n\nLife Expectancy\n\nSpain has seen a steady increase in life expectancy, rising from around 65 years in 1952 to over 81 years by 2007.\nThis trend indicates improvements in healthcare, sanitation, nutrition, and overall living conditions over time.\n\nGDP per Capita\n\nGDP per capita increased significantly from under $5,000 in 1952 to over $30,000 in 2007.\nThe steepest growth occurred after 1980, suggesting economic expansion, industrialization, and stronger integration into the global economy (e.g., Spain joining the EU in 1986).\n\nPopulation Growth\n\nSpain’s population grew consistently from about 28 million in 1952 to over 40 million by 2007.\nThe most rapid growth happened between 1950-1980, after which the rate of increase slowed down, possibly due to declining birth rates and economic shifts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to QTM350 Quiz 02 Website",
+    "section": "",
+    "text": "The Gapminder dataset contains key global development indicators such as GDP per capita, life expectancy, and population for multiple countries across different years. It helps analyze economic growth, health trends, and demographic shifts.\n\n\n\nAbout - Learn more about this project.\nLife Expectancy and GDP per Capita - Relationship between life expectancy and GDP per capita.\nLife Expectancy and Population - Relationship between life expectancy and population.\nCountry Analysis - Changes in life expectancy, GDP per capita, and population over time.\n\n\nThis website was created as part of QTM350 coursework to demonstrate Quarto-based data analysis and website publishing."
+  },
+  {
+    "objectID": "index.html#site-navigation",
+    "href": "index.html#site-navigation",
+    "title": "Welcome to QTM350 Quiz 02 Website",
+    "section": "",
+    "text": "About - Learn more about this project.\nLife Expectancy and GDP per Capita - Relationship between life expectancy and GDP per capita.\nLife Expectancy and Population - Relationship between life expectancy and population.\nCountry Analysis - Changes in life expectancy, GDP per capita, and population over time.\n\n\nThis website was created as part of QTM350 coursework to demonstrate Quarto-based data analysis and website publishing."
+  },
+  {
+    "objectID": "life-population.html",
+    "href": "life-population.html",
+    "title": "Life Expectancy and Population",
+    "section": "",
+    "text": "The relationship between life expectancy and population size provides insights into demographic trends and public health. Larger populations can result from high birth rates and improved healthcare, but rapid population growth may also strain resources and impact life expectancy.\n\n\n\nBelow is a scatter plot (Figure 1) showing the relationship between life expectancy and population size using the Gapminder dataset.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select relevant columns and drop missing values\ndf = df[['population_millions', 'life_expectancy']].dropna()\n\n# Scatter plot\nplt.figure(figsize=(8,6))\nsns.scatterplot(x=df['population_millions'], y=df['life_expectancy'])\nplt.xlabel(\"Population (Millions)\")\nplt.ylabel(\"Life Expectancy (Years)\")\nplt.title(\"Relationship Between Population and Life Expectancy\")\nplt.xscale(\"log\")  # Log scale for better visualization\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Life Expectancy and Population\n\n\n\n\n\nFindings\n\nUnlike GDP per capita, population size does not directly determine life expectancy. Countries with similar populations can have very different life expectancies, suggesting other factors (e.g., healthcare, economy, policies) play a crucial role.\nLarge-population countries like China and India tend to have moderate-to-high life expectancy.\nCountries with smaller populations show wider variation in life expectancy."
+  },
+  {
+    "objectID": "life-population.html#introduction",
+    "href": "life-population.html#introduction",
+    "title": "Life Expectancy and Population",
+    "section": "",
+    "text": "The relationship between life expectancy and population size provides insights into demographic trends and public health. Larger populations can result from high birth rates and improved healthcare, but rapid population growth may also strain resources and impact life expectancy."
+  },
+  {
+    "objectID": "life-population.html#data-visualization",
+    "href": "life-population.html#data-visualization",
+    "title": "Life Expectancy and Population",
+    "section": "",
+    "text": "Below is a scatter plot (Figure 1) showing the relationship between life expectancy and population size using the Gapminder dataset.\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv(\"gapminder.csv\")\n\n# Select relevant columns and drop missing values\ndf = df[['population_millions', 'life_expectancy']].dropna()\n\n# Scatter plot\nplt.figure(figsize=(8,6))\nsns.scatterplot(x=df['population_millions'], y=df['life_expectancy'])\nplt.xlabel(\"Population (Millions)\")\nplt.ylabel(\"Life Expectancy (Years)\")\nplt.title(\"Relationship Between Population and Life Expectancy\")\nplt.xscale(\"log\")  # Log scale for better visualization\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Life Expectancy and Population\n\n\n\n\n\nFindings\n\nUnlike GDP per capita, population size does not directly determine life expectancy. Countries with similar populations can have very different life expectancies, suggesting other factors (e.g., healthcare, economy, policies) play a crucial role.\nLarge-population countries like China and India tend to have moderate-to-high life expectancy.\nCountries with smaller populations show wider variation in life expectancy."
+  }
+]

@@ -1,0 +1,75 @@
+---
+title: "Country Analysis: Spain"
+author: "Bernice Yuan"
+date: "2025-02-26"
+format:
+  html:
+    code-fold: true
+    code-overflow: wrap
+jupyter: python3
+execute: 
+  echo: false
+---
+
+# Country Analysis: Spain
+
+## **Introduction**
+Spain has undergone significant economic and social changes over the years. This analysis explores how **life expectancy, GDP per capita, and population** have evolved in Spain from **1952 to 2007** using the **Gapminder dataset**.
+
+## **Data Visualization**
+Below is a graph (@fig-plot) showing how Spain's **life expectancy, GDP per capita, and population** changed over time.
+
+```{python}
+#| label: fig-plot
+#| echo: true
+#| fig-cap: "Spain"
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("gapminder.csv")
+
+spain_data = df[df["country"] == "Spain"]
+
+# Create subplots
+fig, axes = plt.subplots(3, 1, figsize=(8, 12))
+
+# Plot Life Expectancy
+axes[0].plot(spain_data["year"], spain_data["life_expectancy"], color="blue", marker="o")
+axes[0].set_title("Spain: Life Expectancy Over Time")
+axes[0].set_xlabel("Year")
+axes[0].set_ylabel("Life Expectancy (Years)")
+axes[0].grid(True)
+
+# Plot GDP per Capita
+axes[1].plot(spain_data["year"], spain_data["gdp_per_capita"], color="green", marker="s")
+axes[1].set_title("Spain: GDP per Capita Over Time")
+axes[1].set_xlabel("Year")
+axes[1].set_ylabel("GDP per Capita (USD)")
+axes[1].grid(True)
+
+# Plot Population
+axes[2].plot(spain_data["year"], spain_data["population_millions"], color="red", marker="d")
+axes[2].set_title("Spain: Population Over Time")
+axes[2].set_xlabel("Year")
+axes[2].set_ylabel("Population (Millions)")
+axes[2].grid(True)
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+```
+
+**Findings:**
+
+* Life Expectancy
+    + Spain has seen a steady increase in life expectancy, rising from around 65 years in 1952 to over 81 years by 2007.
+    + This trend indicates improvements in healthcare, sanitation, nutrition, and overall living conditions over time.
+
+* GDP per Capita 
+    + GDP per capita increased significantly from under $5,000 in 1952 to over $30,000 in 2007.
+    + The steepest growth occurred after 1980, suggesting economic expansion, industrialization, and stronger integration into the global economy (e.g., Spain joining the EU in 1986).
+
+* Population Growth
+    + Spain's population grew consistently from about 28 million in 1952 to over 40 million by 2007.
+    + The most rapid growth happened between 1950-1980, after which the rate of increase slowed down, possibly due to declining birth rates and economic shifts.

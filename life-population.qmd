@@ -1,0 +1,52 @@
+---
+title: "Life Expectancy and Population"
+author: "Bernice Yuan"
+date: "2025-02-26"
+format:
+  html:
+    code-fold: true
+    code-overflow: wrap
+jupyter: python3
+execute: 
+  echo: false
+---
+
+# Life Expectancy and Population
+
+## Introduction
+The relationship between **life expectancy** and **population size** provides insights into demographic trends and public health. Larger populations can result from high birth rates and improved healthcare, but rapid population growth may also strain resources and impact life expectancy.
+
+## **Data Visualization**
+Below is a scatter plot (@fig-plot) showing the relationship between **life expectancy** and **population size** using the **Gapminder dataset**.
+
+```{python}
+#| label: fig-plot
+#| echo: true
+#| fig-cap: "Life Expectancy and Population"
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("gapminder.csv")
+
+# Select relevant columns and drop missing values
+df = df[['population_millions', 'life_expectancy']].dropna()
+
+# Scatter plot
+plt.figure(figsize=(8,6))
+sns.scatterplot(x=df['population_millions'], y=df['life_expectancy'])
+plt.xlabel("Population (Millions)")
+plt.ylabel("Life Expectancy (Years)")
+plt.title("Relationship Between Population and Life Expectancy")
+plt.xscale("log")  # Log scale for better visualization
+plt.grid(True)
+plt.show()
+```
+
+**Findings**
+
+* Unlike GDP per capita, population size does not directly determine life expectancy. Countries with similar populations can have very different life expectancies, suggesting other factors (e.g., healthcare, economy, policies) play a crucial role.
+* Large-population countries like China and India tend to have moderate-to-high life expectancy.
+* Countries with smaller populations show wider variation in life expectancy.

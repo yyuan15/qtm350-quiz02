@@ -1,0 +1,18 @@
+---
+title: "Welcome to QTM350 Quiz 02 Website"
+format: html
+---
+
+# Welcome to QTM350 Quiz 02
+
+The **Gapminder dataset** contains key global development indicators such as GDP per capita, life expectancy, and population for multiple countries across different years. It helps analyze economic growth, health trends, and demographic shifts.
+
+## **Site Navigation**
+- [About](about.qmd) - Learn more about this project.
+- [Life Expectancy and GDP per Capita](life-gdp.qmd) - Relationship between life expectancy and GDP per capita.
+- [Life Expectancy and Population](life-population.qmd) - Relationship between life expectancy and population.
+- [Country Analysis](country.qmd) - Changes in life expectancy, GDP per capita, and population over time.
+
+---
+
+This website was created as part of QTM350 coursework to demonstrate Quarto-based data analysis and website publishing.

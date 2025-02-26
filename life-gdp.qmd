@@ -1,0 +1,54 @@
+---
+title: "Life Expectancy and GDP per Capita"
+author: "Bernice Yuan"
+date: "2025-02-26"
+format:
+  html:
+    code-fold: true
+    code-overflow: wrap
+jupyter: python3
+execute: 
+  echo: false
+---
+
+# Life Expectancy and GDP per Capita
+
+## Introduction
+The relationship between **life expectancy** and **GDP per capita** is crucial in understanding global economic development and public health. Generally, higher GDP per capita is associated with **longer life expectancy**, as wealthier countries tend to invest more in healthcare, education, and quality of life improvements.
+
+## **Data Visualization**
+Below is a scatter plot (@fig-plot) showing the relationship between GDP per capita and life expectancy using the **Gapminder dataset**.
+
+```{python}
+#| label: fig-plot
+#| echo: true
+#| fig-cap: "ife Expectancy and GDP per Capita"
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("gapminder.csv")
+
+# Select relevant columns and drop missing values
+df = df[['gdp_per_capita', 'life_expectancy']].dropna()
+
+# Scatter plot
+plt.figure(figsize=(8,6))
+sns.scatterplot(x=df['gdp_per_capita'], y=df['life_expectancy'])
+plt.xlabel("GDP per Capita (USD)")
+plt.ylabel("Life Expectancy (Years)")
+plt.title("Relationship Between GDP per Capita and Life Expectancy")
+plt.xscale("log")  # Log scale for better visualization
+plt.grid(True)
+plt.show()
+```
+
+**Findings:**
+
+* The scatter plot shows a positive correlation between GDP per capita and life expectancy, with a logarithmic scale applied to GDP per capita for better visualization.
+
+* Countries with higher GDP per capita generally have higher life expectancy.
+
+* The increase in life expectancy slows down at higher income levels, meaning wealthier nations gain smaller health benefits from additional economic growth.
